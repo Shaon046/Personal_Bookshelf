@@ -121,8 +121,7 @@ const SearchPage = () => {
               className="min-h-[205px]  bg-white border-black rounded-lg border hover:border-blue px-2"
               key={idx}
             >
-              {/* {  !data && data.length === 0 && <p> No book found</p>} */}
-
+            
               {data.title && (
                 <>
                   {" "}
