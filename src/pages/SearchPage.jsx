@@ -8,10 +8,9 @@ const SearchPage = () => {
   const [loading, setLoading] = useState(false);
   const [inputTouched, setInputTouched] = useState(false);
 
+  const [bookshelf, setBookshelf] = useState([]);
 
-  const [bookshelf,setBookshelf]=useState([])
-
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const inputOnChangeHandler = (eve) => {
     let input = eve.target.value;
 
@@ -34,29 +33,20 @@ const SearchPage = () => {
   };
 
   const AddToBookshelfHandler = (title, count) => {
-    
-
-    setBookshelf((prev)=>([...prev,{title:title,count:count} ]))
+    setBookshelf((prev) => [...prev, { title: title, count: count }]);
   };
 
+  //store to local storage
 
+  useEffect(() => {
+    if (bookshelf.length !== 0) {
+      localStorage.setItem("bookshelf", JSON.stringify(bookshelf));
+    }
+  }, [bookshelf]);
 
-  
-//store to local storage
-
-useEffect(()=>{
-
-  localStorage.setItem('bookshelf', JSON.stringify(bookshelf));
-
-},[bookshelf])
-
-
-
-
-const myBookShelf=()=>{
-  navigate("/bookshelf")
-}
-
+  const myBookShelf = () => {
+    navigate("/bookshelf");
+  };
 
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -102,7 +92,10 @@ const myBookShelf=()=>{
         </div>
 
         <div className="justify-self-center self-center ">
-          <button className="bg-green-400 hover:bg-green-500 px-4 py-1 rounded-lg xs:text-sm md:text-lg" onClick={()=>myBookShelf()} >
+          <button
+            className="bg-green-400 hover:bg-green-500 px-4 py-1 rounded-lg xs:text-sm md:text-lg"
+            onClick={() => myBookShelf()}
+          >
             {" "}
             My Bookshelf
           </button>
